@@ -31,7 +31,6 @@ class HttppreauthPlugin(FilebasedUserManager, octoprint.plugin.TemplatePlugin):
                 self.addUser(preauth_username, str(uuid.uuid4()), True)
                 user = FilebasedUserManager.findUser(self, preauth_username)
             self._logger.debug("now have user " + str(user))
-            #flask_login.current_user = user
             flask_login.login_user(user);
             user = FilebasedUserManager.login_user(self, user)
             self._logger.debug("from old function got " + str(user))
@@ -46,7 +45,8 @@ class HttppreauthPlugin(FilebasedUserManager, octoprint.plugin.TemplatePlugin):
             self._logger.debug("In findUser " + str(preauth_username))
             if preauth_username is None:
                 return None
-            #if preauth_username == userid:
+            if preauth_username != userid:
+                return None
             self._logger.debug("Creating new user " + preauth_username )
             self.addUser(preauth_username, str(uuid.uuid4()), True)
             user = FilebasedUserManager.findUser(self, userid, session)

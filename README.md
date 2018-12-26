@@ -1,6 +1,12 @@
 # OctoPrint-HttpPreauth
 
-**TODO:** Describe what your plugin does.
+For use behind a reverse proxy such as NGINX.
+
+Configure your proxy to authenticate your users via any method you see fit, and add the username as the Remote-User header to all requests to Octoprint.
+
+This plugin will detect that header, create the user if she does not exist in the underlying FilebasedUserManager, and then automatically log her in.
+
+The logout function in Octoprint is non-functional. 
 
 ## Setup
 
@@ -9,9 +15,7 @@ or manually using this URL:
 
     https://github.com/bkuker/OctoPrint-HttpPreauth/archive/master.zip
 
-**TODO:** Describe how to install your plugin, if more needs to be done than just installing it via pip or through
-the plugin manager.
 
 ## Configuration
 
-**TODO:** Describe your plugin's configuration options (if any).
+Setup of NGINX or HAProxy is beyond the scope of this document at this time.
