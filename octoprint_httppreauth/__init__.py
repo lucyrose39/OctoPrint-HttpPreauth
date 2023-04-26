@@ -18,7 +18,7 @@ class HttppreauthPlugin(FilebasedUserManager, octoprint.plugin.TemplatePlugin):
         self._logger.debug("Got from old function " + str(user))
         if user is None:
             self._logger.debug("user is none, checking header")
-            preauth_username = request.headers.get("X-Email")
+            preauth_username = request.headers.get("X-Token-Subject")
             self._logger.debug("In login_user " + str(preauth_username))
             print(str(request.headers))
             print(preauth_username)
@@ -41,7 +41,7 @@ class HttppreauthPlugin(FilebasedUserManager, octoprint.plugin.TemplatePlugin):
         self._logger.debug("In findUser")
         user = FilebasedUserManager.findUser(self, userid, session)
         if not user:
-            preauth_username = request.headers.get("X-Email")
+            preauth_username = request.headers.get("X-Token-Subject")
             self._logger.debug("In findUser " + str(preauth_username))
             if preauth_username is None:
                 return None
